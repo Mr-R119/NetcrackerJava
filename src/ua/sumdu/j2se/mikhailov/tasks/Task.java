@@ -32,7 +32,7 @@ public class Task {
         this.title = title;
     }
 
-    public boolean isActive(){
+    public boolean isActive() {
         return active;
     }
 
@@ -41,41 +41,42 @@ public class Task {
     }
 
     public int getTime() {
-        if(isRepeated()){
+        if (isRepeated()) {
             return start;
         }
         return time;
     }
 
     public void setTime(int time) {
-        if(isRepeated()){
+        if (isRepeated()) {
             this.repeated = false;
         }
         this.time = time;
     }
 
     public int getStartTime() {
-        if(!isRepeated()){
+        if (!isRepeated()) {
             return time;
         }
         return start;
     }
 
     public int getEndTime() {
-        if(!isRepeated()){
+        if (!isRepeated()) {
             return 0;
         }
         return end;
     }
 
-    public int getRepeatInterval(){
-        if(!isRepeated()){
+    public int getRepeatInterval() {
+        if (!isRepeated()) {
             return 0;
         }
         return interval;
     }
-    public void setTime(int start, int end, int interval){
-        if(!isRepeated()){
+
+    public void setTime(int start, int end, int interval) {
+        if (!isRepeated()) {
             this.repeated = true;
         }
         this.start = start;
@@ -83,7 +84,29 @@ public class Task {
         this.interval = interval;
     }
 
-    private boolean isRepeated(){
+    private boolean isRepeated() {
         return repeated;
+    }
+
+    public int nextTimeAfter(int current) {
+        if (isActive()) {
+            if (!isRepeated()) {
+                if (current > time) return -1;
+                return time;
+            } else {
+                if (current > end || current < start) {
+                    return -1;
+                } else if (current == end || current == start) {
+                    return current;
+                } else {
+                    if (current <= interval) {
+                        return start + interval;
+                    } else {
+                        int next = current / interval + 1;
+                        return start + next * interval;
+                    }
+                }
+            }
+        } else return -1;
     }
 }
