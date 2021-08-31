@@ -89,24 +89,12 @@ public class Task {
     }
 
     public int nextTimeAfter(int current) {
-        if (isActive()) {
-            if (!isRepeated()) {
-                if (current > time) return -1;
-                return time;
-            } else {
-                if (current > end || current < start) {
-                    return -1;
-                } else if (current == end || current == start) {
-                    return current;
-                } else {
-                    if (current <= interval) {
-                        return start + interval;
-                    } else {
-                        int next = current / interval + 1;
-                        return start + next * interval;
-                    }
-                }
-            }
-        } else return -1;
+        if(current >= getEndTime() || !isActive()) return -1;
+        else if(current < getStartTime()) return getStartTime();
+        else {
+            int nextTime = current / interval + 1;
+            nextTime = start + nextTime*interval;
+            return nextTime;
+        }
     }
 }
