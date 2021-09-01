@@ -97,9 +97,12 @@ public class Task {
         if(current >= getEndTime() || !isActive()) return -1;
         else if(current < getStartTime()) return getStartTime();
         else {
-            int nextTime = current / interval + 1;
-            nextTime = start + nextTime*interval;
-            return nextTime;
+            int tmp = getStartTime();
+            for(; tmp < getEndTime(); tmp += interval){
+                if (tmp > current)
+                    break;
+            }
+            return tmp;
         }
     }
 }
