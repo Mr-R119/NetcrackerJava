@@ -13,7 +13,8 @@ public class Task {
     public Task(String title, int time) {
         this.title = title;
         this.time = time;
-        this.repeated = false;
+        repeated = false;
+        active = true;
     }
 
     public Task(String title, int start, int end, int interval) {
@@ -22,6 +23,7 @@ public class Task {
         this.end = end;
         this.interval = interval;
         this.repeated = true;
+        this.active = true;
     }
 
     public String getTitle() {
@@ -49,6 +51,9 @@ public class Task {
 
     public void setTime(int time) {
         if (isRepeated()) {
+            this.start = 0;
+            this.interval = 0;
+            this.end = 0;
             this.repeated = false;
         }
         this.time = time;
@@ -63,7 +68,7 @@ public class Task {
 
     public int getEndTime() {
         if (!isRepeated()) {
-            return 0;
+            return time;
         }
         return end;
     }
