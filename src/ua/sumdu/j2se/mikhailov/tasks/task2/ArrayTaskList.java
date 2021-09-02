@@ -1,7 +1,5 @@
 package ua.sumdu.j2se.mikhailov.tasks.task2;
 
-import ua.sumdu.j2se.mikhailov.tasks.task1.Task;
-
 public class ArrayTaskList  {
 
     private Task[] tasks;
