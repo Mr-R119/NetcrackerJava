@@ -17,7 +17,8 @@ public abstract class AbstractTaskList {
     public AbstractTaskList incoming(int from, int to){
         if(to < 0)
             throw new IllegalArgumentException("Time must be greater than 0");
-        ArrayTaskList incomingTasks = new ArrayTaskList();
+
+        AbstractTaskList incomingTasks = TaskListFactory.createTaskList(ListTypes.ARRAY);
         for(int i = 0; i < size; i++){
             if(getTask(i).nextTimeAfter(from) != -1 && getTask(i).nextTimeAfter(from) <= to)
                 incomingTasks.add(getTask(i));

@@ -59,7 +59,7 @@ public class ArrayTaskList extends AbstractTaskList {
 
     private void rangeCheck(int index){
         if(index >= size){
-            throw new IndexOutOfBoundsException("Index: " + index + "Size: " + size);
+            throw new IndexOutOfBoundsException("Index: " + index + " Size: " + size);
         }
     }
 
