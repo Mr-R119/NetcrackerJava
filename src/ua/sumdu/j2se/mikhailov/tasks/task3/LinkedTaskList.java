@@ -1,13 +1,7 @@
 package ua.sumdu.j2se.mikhailov.tasks.task3;
 
-import ua.sumdu.j2se.mikhailov.tasks.task5.AbstractTaskList;
-import ua.sumdu.j2se.mikhailov.tasks.task5.ArrayTaskList;
-
-import java.util.LinkedList;
-
 public class LinkedTaskList {
 
-    private Task task;
     private Node<Task> head;
     private Node<Task> tail;
     private int size = 0;
@@ -25,7 +19,7 @@ public class LinkedTaskList {
         }
     }
 
-    public void add(Task task){
+    public void add(Task task) {
         final Node<Task> l = tail;
         final Node<Task> newNode = new Node<>(l, task, null);
         tail = newNode;
@@ -38,20 +32,11 @@ public class LinkedTaskList {
     }
 
 
-    public boolean remove(Task task){
-        if (task == null) {
-            for (Node<Task> x = head; x != null; x = x.next) {
-                if (x.item == null) {
-                    unlink(x);
-                    return true;
-                }
-            }
-        } else {
-            for (Node<Task> x = head; x != null; x = x.next) {
-                if (task.equals(x.item)) {
-                    unlink(x);
-                    return true;
-                }
+    public boolean remove(Task task) {
+        for (Node<Task> x = head; x != null; x = x.next) {
+            if (x.item.equals(task)) {
+                unlink(x);
+                return true;
             }
         }
         return false;
@@ -82,9 +67,9 @@ public class LinkedTaskList {
         return element;
     }
 
-    public Task getTask(int index){
-        if(!rangeCheck(index))
-            throw new IndexOutOfBoundsException("Index: "+index+", Size: "+size);
+    public Task getTask(int index) {
+        if (!rangeCheck(index))
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
 
         if (index < (size >> 1)) {
             Node<Task> x = head;
@@ -99,11 +84,11 @@ public class LinkedTaskList {
         }
     }
 
-    private boolean rangeCheck(int index){
+    private boolean rangeCheck(int index) {
         return index >= 0 && index < size;
     }
 
-    public int size(){
+    public int size() {
         return size;
     }
 
