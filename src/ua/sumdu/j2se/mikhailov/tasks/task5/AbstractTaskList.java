@@ -1,8 +1,9 @@
 package ua.sumdu.j2se.mikhailov.tasks.task5;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
-public abstract class AbstractTaskList implements Iterable<Task> {
+public abstract class AbstractTaskList implements Iterable<Task>, Cloneable {
 
     protected int size;
 
@@ -28,27 +29,31 @@ public abstract class AbstractTaskList implements Iterable<Task> {
         return incomingTasks;
     }
 
-    @Override
     public Iterator<Task> iterator() {
-        return new Iterator<Task>() {
+        return new Itr();
+    }
 
-            int tmp = 0;
+    private class Itr implements Iterator<Task> {
+        int cursor = 0;
+        int lastRet = -1;
 
-            @Override
-            public boolean hasNext() {
-                return size() > tmp && getTask(tmp) != null;
+        @Override
+        public boolean hasNext() {
+            return cursor != size;
+        }
+
+        @Override
+        public Task next() {
+            try {
+                int i = cursor;
+                Task next = getTask(i);
+                lastRet = i;
+                cursor = i + 1;
+                return next;
+            } catch (IndexOutOfBoundsException e) {
+                throw new NoSuchElementException();
             }
-
-            @Override
-            public Task next() {
-                return getTask(tmp++);
-            }
-
-            @Override
-            public void remove() {
-                AbstractTaskList.this.remove(getTask(tmp));
-            }
-        };
+        }
     }
 
 
@@ -59,6 +64,9 @@ public abstract class AbstractTaskList implements Iterable<Task> {
 
         if (obj == this)
             return true;
+
+        if (!(obj instanceof AbstractTaskList))
+            return false;
 
         AbstractTaskList other = (AbstractTaskList) obj;
         if (size() != other.size()) {
@@ -87,12 +95,10 @@ public abstract class AbstractTaskList implements Iterable<Task> {
 
     @Override
     public String toString() {
-        String write = "";
+        StringBuilder write = new StringBuilder();
         for (int i = 0; i < size(); i++) {
-            write += getTask(i).toString() + "\n";
+            write.append(getTask(i).toString()).append("\n");
         }
-        return write;
+        return write.toString();
     }
-
-
 }

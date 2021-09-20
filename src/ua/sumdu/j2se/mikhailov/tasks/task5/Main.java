@@ -11,6 +11,7 @@ public class Main {
         Task task4 = new Task("Task4", 0, 120, 10);
 
 
+        System.out.println("ArrayTaskList");
         ArrayTaskList arrayTaskList = new ArrayTaskList();
 
 //      Добавляем в список задачи
@@ -19,42 +20,28 @@ public class Main {
         arrayTaskList.add(task3);
         arrayTaskList.add(task4);
 
-        for (int i = 0; i < arrayTaskList.size(); i++) {
-            System.out.println(arrayTaskList.getTask(i));
-        }
-
-        System.out.println("\n\nКлонирование:");
-
 //      Клонирование
-        ArrayTaskList arrayTaskList1 = (ArrayTaskList) arrayTaskList.clone();
+        ArrayTaskList arrayTaskList1 = arrayTaskList.clone();
         arrayTaskList1.getTask(1).setTitle("1111");
-        arrayTaskList1.getTask(1).setTime(15);
         System.out.println(arrayTaskList);
-        System.out.println("Копия: " + arrayTaskList1);
+        System.out.println("Копия:\n" + arrayTaskList1);
 
 
-        for (int i = 0; i < arrayTaskList.size(); i++) {
-            System.out.println(arrayTaskList.getTask(i));
-            System.out.println("Копия: " + arrayTaskList1.getTask(i));
-        }
+        System.out.println("LinkedTaskList");
 
+        LinkedTaskList linkedTaskList = new LinkedTaskList();
 
-//        arrayTaskList1.add(task1);
-//        arrayTaskList1.add(task2);
-//        arrayTaskList1.add(task3);
-//        arrayTaskList1.add(task4);
-
-
-        AbstractTaskList linkedTaskList = TaskListFactory.createTaskList(ListTypes.LINKED);
-
-
+//      Добавляем в список задачи
         linkedTaskList.add(task1);
         linkedTaskList.add(task2);
         linkedTaskList.add(task3);
         linkedTaskList.add(task4);
 
-
-        linkedTaskList.remove(task1);
+//      Клонирование
+        LinkedTaskList linkedTaskList1 = linkedTaskList.clone();
+        linkedTaskList1.getTask(1).setTitle("1111");
+        System.out.println(linkedTaskList);
+        System.out.println("Копия:\n" + linkedTaskList1);
 
 //        Проверка метода equals()
 //        System.out.println(arrayTaskList.equals(arrayTaskList1));

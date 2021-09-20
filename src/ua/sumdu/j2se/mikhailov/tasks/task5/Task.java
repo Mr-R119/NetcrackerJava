@@ -1,6 +1,6 @@
 package ua.sumdu.j2se.mikhailov.tasks.task5;
 
-public class Task {
+public class Task implements Cloneable{
 
     private String title;
     private int time;
@@ -164,26 +164,27 @@ public class Task {
 
     @Override
     public String toString(){
-        String write;
+        StringBuilder write = new StringBuilder("Title: ");
+        write.append(this.title);
         if(isRepeated())
-            write = ", Start: " + this.start + ", End: " + this.end + ", Interval: " + this.interval;
+            write.append(", Start: ").append(this.start).append(", End: ").append(this.end).append(", Interval: ").append(this.interval);
         else
-            write = ", Time: " + this.time;
+            write.append(", Time: ").append(this.time);
 
-        return "Title: " + this.title + write;
+        return write.toString();
     }
 
     @Override
     public Task clone() {
         try {
             Task tmp = (Task) super.clone();
-            tmp.title = this.title;
+            tmp.title = getTitle();
             if (this.isRepeated()) {
-                tmp.start = this.start;
-                tmp.end = this.end;
-                tmp.interval = this.interval;
+                tmp.start = getStartTime();
+                tmp.end = getEndTime();
+                tmp.interval = getRepeatInterval();
             } else
-                tmp.time = this.time;
+                tmp.time = this.getTime();
             return tmp;
         } catch (CloneNotSupportedException e) {
             throw new InternalError(e);

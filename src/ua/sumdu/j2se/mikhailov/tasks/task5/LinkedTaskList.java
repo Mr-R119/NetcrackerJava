@@ -1,5 +1,8 @@
 package ua.sumdu.j2se.mikhailov.tasks.task5;
 
+import java.util.ListIterator;
+import java.util.NoSuchElementException;
+
 public class LinkedTaskList extends AbstractTaskList {
 
     private Node<Task> head;
@@ -20,6 +23,21 @@ public class LinkedTaskList extends AbstractTaskList {
     }
 
     public void add(Task task) {
+        link(task);
+    }
+
+
+    public boolean remove(Task task) {
+        for (Node<Task> x = head; x != null; x = x.next) {
+            if (x.item.equals(task)) {
+                unlink(x);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    void link(Task task) {
         final Node<Task> l = tail;
         final Node<Task> newNode = new Node<>(l, task, null);
         tail = newNode;
@@ -28,18 +46,6 @@ public class LinkedTaskList extends AbstractTaskList {
         else
             l.next = newNode;
         size++;
-
-    }
-
-
-    public boolean remove(Task task) {
-            for (Node<Task> x = head; x != null; x = x.next) {
-                if (x.item.equals(task)) {
-                    unlink(x);
-                    return true;
-            }
-        }
-        return false;
     }
 
     Task unlink(Node<Task> x) {
@@ -93,27 +99,101 @@ public class LinkedTaskList extends AbstractTaskList {
     }
 
 
-    private LinkedTaskList superClone() {
-        try {
-            return (LinkedTaskList) super.clone();
-        } catch (CloneNotSupportedException e) {
-            throw new InternalError(e);
+    public ListIterator<Task> listItr() {
+        return new ListItr();
+    }
+
+    private class ListItr implements ListIterator<Task> {
+        private Node<Task> lastReturned;
+        private Node<Task> next;
+        private int nextIndex;
+
+
+        @Override
+        public boolean hasNext() {
+            return nextIndex != size;
+        }
+
+        @Override
+        public Task next() {
+
+            if (!hasNext())
+                throw new NoSuchElementException();
+
+            lastReturned = next;
+            next = next.next;
+            nextIndex++;
+            return lastReturned.item;
+        }
+
+        @Override
+        public boolean hasPrevious() {
+            return nextIndex > 0;
+        }
+
+        @Override
+        public Task previous() {
+            if (!hasPrevious())
+                throw new NoSuchElementException();
+
+            lastReturned = next = (next == null) ? tail : next.prev;
+            nextIndex--;
+            return lastReturned.item;
+        }
+
+        @Override
+        public int nextIndex() {
+            return nextIndex;
+        }
+
+        @Override
+        public int previousIndex() {
+            return nextIndex - 1;
+        }
+
+        @Override
+        public void remove() {
+            if (lastReturned == null)
+                throw new IllegalStateException();
+
+            Node<Task> last = lastReturned.next;
+            unlink(lastReturned);
+            if (next == lastReturned)
+                next = last;
+            else
+                nextIndex--;
+            lastReturned = null;
+        }
+
+        @Override
+        public void set(Task task) {
+            if (lastReturned == null)
+                throw new IllegalStateException();
+            lastReturned.item = task;
+        }
+
+        @Override
+        public void add(Task task) {
+            lastReturned = null;
+            link(task);
+            nextIndex++;
+
         }
     }
 
 
     @Override
-    public Object clone() {
-
-            LinkedTaskList clone = superClone();
-
+    public LinkedTaskList clone() {
+        try {
+            LinkedTaskList clone = (LinkedTaskList) super.clone();
             clone.head = clone.tail = null;
             clone.size = 0;
-
             for (Node<Task> x = head; x != null; x = x.next)
-                clone.add(x.item);
-
+                clone.add(x.item.clone());
             return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new InternalError(e);
+        }
     }
 }
 

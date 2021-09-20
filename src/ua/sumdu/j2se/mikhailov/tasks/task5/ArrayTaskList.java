@@ -1,25 +1,27 @@
 package ua.sumdu.j2se.mikhailov.tasks.task5;
 
+import java.util.Arrays;
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 public class ArrayTaskList extends AbstractTaskList {
 
-    private Task[] tasks;
+    private final int DEFAULT_SIZE = 10;
+    private Task[] tasks = new Task[DEFAULT_SIZE];
 
     @Override
     public void add(Task task) {
 
-        if (tasks == null) {
-            tasks = new Task[1];
-        }
+        if (size == tasks.length - 1)
+            resize(tasks.length * 2);
+        tasks[size++] = task;
+    }
 
-        if (size < tasks.length) {
-            tasks[size] = task;
-        } else {
-            Task[] tasks1 = new Task[size + 1];
-            System.arraycopy(tasks, 0, tasks1, 0, size);
-            tasks1[size] = task;
-            tasks = tasks1;
-        }
-        size++;
+    private void resize(int newLength) {
+        Task[] newTasks = new Task[newLength];
+        System.arraycopy(tasks, 0, newTasks, 0, size);
+        tasks = newTasks;
     }
 
     @Override
@@ -54,16 +56,42 @@ public class ArrayTaskList extends AbstractTaskList {
         }
     }
 
+
+    public Iterator<Task> iterator() {
+        return new Itr();
+    }
+
+    private class Itr implements Iterator<Task> {
+        int cursor = 0;
+        int lastRet = -1;
+
+        @Override
+        public boolean hasNext() {
+            return cursor != size;
+        }
+
+        @Override
+        public Task next() {
+            int i = cursor;
+            if (i >= size)
+                throw new NoSuchElementException();
+
+            Task[] data = ArrayTaskList.this.tasks;
+            if (i >= tasks.length)
+                throw new ConcurrentModificationException();
+            cursor = i + 1;
+            return data[lastRet = i];
+        }
+    }
+
     @Override
-    public Object clone() {
+    public ArrayTaskList clone() {
         try {
             ArrayTaskList tmp = (ArrayTaskList) super.clone();
-            tmp.tasks = null;
-            for (Task task : tasks) {
-                tmp.add(task);
-            }
+            tmp.tasks = Arrays.copyOf(tasks,size);
+            for(int i = 0; i < size; i++)
+                tmp.tasks[i] = getTask(i).clone();
             return tmp;
-
         } catch (CloneNotSupportedException e) {
             throw new InternalError(e);
         }
