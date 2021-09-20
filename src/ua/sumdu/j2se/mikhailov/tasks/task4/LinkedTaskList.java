@@ -6,7 +6,6 @@ public class LinkedTaskList extends AbstractTaskList {
     private Node<Task> tail;
     private int size = 0;
 
-
     private static class Node<Task> {
         Task item;
         Node<Task> next;
@@ -19,7 +18,7 @@ public class LinkedTaskList extends AbstractTaskList {
         }
     }
 
-    public void add(Task task){
+    public void add(Task task) {
         final Node<Task> l = tail;
         final Node<Task> newNode = new Node<>(l, task, null);
         tail = newNode;
@@ -32,21 +31,13 @@ public class LinkedTaskList extends AbstractTaskList {
     }
 
 
-    public boolean remove(Task task){
-        if (task == null) {
-            for (Node<Task> x = head; x != null; x = x.next) {
-                if (x.item == null) {
-                    unlink(x);
-                    return true;
-                }
+    public boolean remove(Task task) {
+        for (Node<Task> x = head; x != null; x = x.next) {
+            if (x.item.equals(task)) {
+                unlink(x);
+                return true;
             }
-        } else {
-            for (Node<Task> x = head; x != null; x = x.next) {
-                if (task.equals(x.item)) {
-                    unlink(x);
-                    return true;
-                }
-            }
+
         }
         return false;
     }
@@ -76,9 +67,9 @@ public class LinkedTaskList extends AbstractTaskList {
         return element;
     }
 
-    public Task getTask(int index){
-        if(!rangeCheck(index))
-            throw new IndexOutOfBoundsException("Index: "+index+", Size: "+size);
+    public Task getTask(int index) {
+        if (!rangeCheck(index))
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
 
         if (index < (size >> 1)) {
             Node<Task> x = head;
@@ -93,11 +84,11 @@ public class LinkedTaskList extends AbstractTaskList {
         }
     }
 
-    private boolean rangeCheck(int index){
+    private boolean rangeCheck(int index) {
         return index >= 0 && index < size;
     }
 
-    public int size(){
+    public int size() {
         return size;
     }
 

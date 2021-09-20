@@ -1,6 +1,6 @@
 package ua.sumdu.j2se.mikhailov.tasks.task4;
 
-public abstract class AbstractTaskList {
+public abstract class AbstractTaskList extends TaskListFactory {
 
     protected int size;
 
@@ -18,13 +18,12 @@ public abstract class AbstractTaskList {
         if(to < 0)
             throw new IllegalArgumentException("Time must be greater than 0");
 
-        AbstractTaskList incomingTasks = TaskListFactory.createTaskList(ListTypes.ARRAY);
+        AbstractTaskList incomingTasks = createTaskList(ListTypes.ARRAY);
         for(int i = 0; i < size; i++){
             if(getTask(i).nextTimeAfter(from) != -1 && getTask(i).nextTimeAfter(from) <= to)
                 incomingTasks.add(getTask(i));
         }
         return incomingTasks;
     }
-
 
 }

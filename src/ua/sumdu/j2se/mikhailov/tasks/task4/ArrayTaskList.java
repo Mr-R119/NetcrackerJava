@@ -25,19 +25,11 @@ public class ArrayTaskList extends AbstractTaskList {
     @Override
     public boolean remove(Task task) {
 
-        if (task == null) {
-            for (int index = 0; index < size; index++)
-                if (tasks[index] == null) {
-                    fastRemove(index);
-                    return true;
-                }
-        } else {
-            for (int index = 0; index < size; index++)
-                if (task == tasks[index]) {
-                    fastRemove(index);
-                    return true;
-                }
-        }
+        for (int index = 0; index < size; index++)
+            if (tasks[index].equals(task)) {
+                fastRemove(index);
+                return true;
+            }
         return false;
 
     }
@@ -57,21 +49,10 @@ public class ArrayTaskList extends AbstractTaskList {
         return tasks[index];
     }
 
-    private void rangeCheck(int index){
-        if(index >= size){
+    private void rangeCheck(int index) {
+        if (index >= size) {
             throw new IndexOutOfBoundsException("Index: " + index + " Size: " + size);
         }
     }
 
-
-//    public ArrayTaskList incoming(int from, int to){
-//        if(to < 0)
-//            throw new IllegalArgumentException("Time must be greater than 0");
-//        ArrayTaskList incomingTasks = new ArrayTaskList();
-//        for(int i = 0; i < size; i++){
-//            if(tasks[i].nextTimeAfter(from) != -1 && tasks[i].nextTimeAfter(from) <= to)
-//                incomingTasks.add(tasks[i]);
-//        }
-//        return incomingTasks;
-//    }
 }
