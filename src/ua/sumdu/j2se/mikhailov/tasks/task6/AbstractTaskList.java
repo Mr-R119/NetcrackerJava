@@ -23,7 +23,7 @@ public abstract class AbstractTaskList implements Iterable<Task>, Cloneable {
         if (to < 0)
             throw new IllegalArgumentException("Time must be greater than 0");
 
-        return this.getStream().filter(task -> !(task.getStartTime() < from) && !(task.getEndTime() > to))
+        return this.getStream().filter(task -> (task.nextTimeAfter(from) != -1 && task.nextTimeAfter(from) <= to))
                 .collect(Collectors.toList()).iterator();
     }
 

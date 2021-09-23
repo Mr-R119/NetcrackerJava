@@ -22,7 +22,7 @@ public abstract class AbstractTaskList implements Iterable<Task>, Cloneable {
             throw new IllegalArgumentException("Time must be greater than 0");
         AbstractTaskList incomingTasks = new ArrayTaskList();
         for (Task task : tasks) {
-            if (!(task.getStartTime() < from) && !(task.getEndTime() > to)) {
+            if (task.nextTimeAfter(from) != -1 && task.nextTimeAfter(from) <= to) {
                 incomingTasks.add(task);
             }
         }
