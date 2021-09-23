@@ -41,7 +41,7 @@ public class Main {
 
         stream1.forEach(System.out::println);
 
-        linkedTaskList.incoming(0,20).forEachRemaining(System.out::println);
+        linkedTaskList.incoming(0,20).forEach(System.out::println);
 
 
     }
