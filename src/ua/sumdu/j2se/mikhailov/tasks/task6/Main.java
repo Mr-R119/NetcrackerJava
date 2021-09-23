@@ -5,7 +5,6 @@ import java.util.stream.Stream;
 
 public class Main {
 
-
     public static void main(String[] args) {
         Task task1 = new Task("Task1", 10);
         Task task2 = new Task("Task2", 0, 120, 10);
@@ -41,6 +40,8 @@ public class Main {
         Stream<Task> stream1 = linkedTaskList.getStream();
 
         stream1.forEach(System.out::println);
+
+        linkedTaskList.incoming(0,20).forEachRemaining(System.out::println);
 
 
     }

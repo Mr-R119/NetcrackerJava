@@ -2,6 +2,7 @@ package ua.sumdu.j2se.mikhailov.tasks.task6;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public abstract class AbstractTaskList implements Iterable<Task>, Cloneable {
@@ -18,16 +19,12 @@ public abstract class AbstractTaskList implements Iterable<Task>, Cloneable {
         return size;
     }
 
-    public final Iterable<Task> incoming(Iterable<Task> tasks, int from, int to) {
+    public final Iterator<Task> incoming(int from, int to) {
         if (to < 0)
             throw new IllegalArgumentException("Time must be greater than 0");
-        AbstractTaskList incomingTasks = new ArrayTaskList();
-        for (Task task : tasks) {
-            if (!(task.getStartTime() < from) && !(task.getEndTime() > to)) {
-                incomingTasks.add(task);
-            }
-        }
-        return incomingTasks;
+
+        return this.getStream().filter(task -> !(task.getStartTime() < from) && !(task.getEndTime() > to))
+                .collect(Collectors.toList()).iterator();
     }
 
     public Iterator<Task> iterator() {
