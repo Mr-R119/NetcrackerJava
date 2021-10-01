@@ -3,7 +3,7 @@ package ua.sumdu.j2se.mikhailov.tasks.task7;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class Task implements Cloneable{
+public class Task implements Cloneable {
 
     private String title;
     private LocalDateTime time;
@@ -117,9 +117,8 @@ public class Task implements Cloneable{
         else if (current.isBefore(getStartTime()) || current.isEqual(getEndTime())) return getStartTime();
         else {
             LocalDateTime tmp = getStartTime();
-            for (; tmp.isBefore(getEndTime()); tmp = tmp.plusHours(interval)) {
-                if (tmp.isAfter(current))
-                    break;
+            while (!tmp.isAfter(current)) {
+                tmp = tmp.plusHours(interval);
             }
             return tmp;
         }
@@ -129,7 +128,7 @@ public class Task implements Cloneable{
     public boolean equals(Object obj) {
 
         if (this == obj)
-        return true;
+            return true;
 
         if (obj == null || getClass() != obj.getClass())
             return false;
@@ -137,25 +136,25 @@ public class Task implements Cloneable{
 
         Task other = (Task) obj;
 
-        if(interval != other.interval) return false;
-        if(active != other.active) return false;
-        if(repeated != other.repeated) return false;
-        if(!Objects.equals(title, other.title)) return false;
-        if(!Objects.equals(time, other.time)) return false;
-        if(!Objects.equals(start, other.start)) return false;
+        if (interval != other.interval) return false;
+        if (active != other.active) return false;
+        if (repeated != other.repeated) return false;
+        if (!Objects.equals(title, other.title)) return false;
+        if (!Objects.equals(time, other.time)) return false;
+        if (!Objects.equals(start, other.start)) return false;
         return end != null ? end.equals(other.end) : other.end != null;
     }
 
 
     @Override
-    public int hashCode(){
+    public int hashCode() {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((title == null) ? 0 : title.hashCode());
         result = prime * result + (active ? 1231 : 1237);
         result = prime * result + (repeated ? 1231 : 1237);
         result = prime * result + (time != null ? time.hashCode() : 0);
-        result = prime * result + (start!= null ? start.hashCode() : 0);
+        result = prime * result + (start != null ? start.hashCode() : 0);
         result = prime * result + (end != null ? end.hashCode() : 0);
         result = prime * result + (int) interval;
 
@@ -164,10 +163,10 @@ public class Task implements Cloneable{
 
 
     @Override
-    public String toString(){
+    public String toString() {
         StringBuilder write = new StringBuilder("Title: ");
         write.append(this.title);
-        if(isRepeated())
+        if (isRepeated())
             write.append(", Start: ").append(this.start).append(", End: ").append(this.end).append(", Interval: ").append(this.interval);
         else
             write.append(", Time: ").append(this.time);

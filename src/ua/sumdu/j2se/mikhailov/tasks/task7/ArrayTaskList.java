@@ -1,29 +1,22 @@
 package ua.sumdu.j2se.mikhailov.tasks.task7;
 
-import java.util.Arrays;
-import java.util.ConcurrentModificationException;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
+import java.util.*;
 import java.util.stream.Stream;
 
 public class ArrayTaskList extends AbstractTaskList {
 
-    private final int DEFAULT_SIZE = 10;
-    private Task[] tasks = new Task[DEFAULT_SIZE];
+    private Task[] tasks = new Task[]{};
 
     @Override
     public void add(Task task) {
-
-        if (size == tasks.length - 1)
-            resize(tasks.length * 2);
-        tasks[size++] = task;
+        if (Objects.equals(task, null)) {
+            throw new NullPointerException("The task was empty(null)!");
+        }
+        size = tasks.length;
+        tasks = Arrays.copyOf(tasks, size + 1);
+        tasks[tasks.length - 1] = task;
     }
 
-    private void resize(int newLength) {
-        Task[] newTasks = new Task[newLength];
-        System.arraycopy(tasks, 0, newTasks, 0, size);
-        tasks = newTasks;
-    }
 
     @Override
     public boolean remove(Task task) {
@@ -94,8 +87,8 @@ public class ArrayTaskList extends AbstractTaskList {
     public ArrayTaskList clone() {
         try {
             ArrayTaskList tmp = (ArrayTaskList) super.clone();
-            tmp.tasks = Arrays.copyOf(tasks,size);
-            for(int i = 0; i < size; i++)
+            tmp.tasks = Arrays.copyOf(tasks, size);
+            for (int i = 0; i < size; i++)
                 tmp.tasks[i] = getTask(i).clone();
             return tmp;
         } catch (CloneNotSupportedException e) {
