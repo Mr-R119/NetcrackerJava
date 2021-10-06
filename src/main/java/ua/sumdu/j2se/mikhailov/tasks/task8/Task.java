@@ -1,10 +1,14 @@
 package ua.sumdu.j2se.mikhailov.tasks.task8;
 
 import java.io.Serializable;
+import java.text.DateFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class Task implements Cloneable, Serializable {
+
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy:HH:mm:ss");
 
     private String title;
     private LocalDateTime time;
@@ -169,9 +173,9 @@ public class Task implements Cloneable, Serializable {
         StringBuilder write = new StringBuilder("Title: ");
         write.append(this.title);
         if(isRepeated())
-            write.append(", Start: ").append(this.start).append(", End: ").append(this.end).append(", Interval: ").append(this.interval);
+            write.append(", Start: ").append(this.start.format(FORMATTER)).append(", End: ").append(this.end.format(FORMATTER)).append(", Interval: ").append(this.interval);
         else
-            write.append(", Time: ").append(this.time);
+            write.append(", Time: ").append(this.time.format(FORMATTER));
 
         return write.toString();
     }
@@ -192,4 +196,5 @@ public class Task implements Cloneable, Serializable {
             throw new InternalError(e);
         }
     }
+
 }

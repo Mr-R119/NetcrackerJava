@@ -28,11 +28,18 @@ public class Main {
         abstractTaskList.add(task3);
         abstractTaskList.add(task4);
 
-        TaskIO.writeBinary(abstractTaskList, new File("out.txt"));
-
         AbstractTaskList list = new LinkedTaskList();
+        //Reading and writing a byte stream
 
-        TaskIO.readBinary(list,new File("out.txt"));
+//        TaskIO.writeBinary(abstractTaskList, new File("out.txt"));
+//        TaskIO.readBinary(list,new File("out.txt"));
+//        TaskIO.readBinary(list,new File("out.txt"));
+
+
+        //Reading and writing a character stream
+        TaskIO.writerText(abstractTaskList, new File("out2.txt"));
+        TaskIO.readText(list, new File("out2.txt"));
+
 
         System.out.println(list);
 
