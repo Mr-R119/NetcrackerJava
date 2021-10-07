@@ -2,17 +2,8 @@ package ua.sumdu.j2se.mikhailov.tasks.task8;
 
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
-import java.util.Set;
-import java.util.SortedMap;
 
 public class Main {
 
@@ -28,20 +19,17 @@ public class Main {
         abstractTaskList.add(task3);
         abstractTaskList.add(task4);
 
-        AbstractTaskList list = new LinkedTaskList();
-        //Reading and writing a byte stream
+        AbstractTaskList list = new ArrayTaskList();
 
+        //Reading and writing a byte stream
 //        TaskIO.writeBinary(abstractTaskList, new File("out.txt"));
-//        TaskIO.readBinary(list,new File("out.txt"));
 //        TaskIO.readBinary(list,new File("out.txt"));
 
 
         //Reading and writing a character stream
-        TaskIO.writerText(abstractTaskList, new File("out2.txt"));
-        TaskIO.readText(list, new File("out2.txt"));
-
+        TaskIO.writerText(abstractTaskList, new File("out2.json"));
+        TaskIO.readText(list, new File("out2.json"));
 
         System.out.println(list);
-
     }
 }

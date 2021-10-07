@@ -1,11 +1,13 @@
 package ua.sumdu.j2se.mikhailov.tasks.task8;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.io.*;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-
 public class TaskIO {
     private static void write(AbstractTaskList tasks, OutputStream out) throws IOException {
         DataOutputStream outputStream = new DataOutputStream(out);
@@ -66,37 +68,25 @@ public class TaskIO {
 
     private static void write(AbstractTaskList tasks, Writer out) throws IOException {
         BufferedWriter writer = new BufferedWriter(out);
-        writer.write(tasks.size() + "\n");
-        for (Task task : tasks) {
-            writer.write(task.getTitle().length() + "\n");
-            writer.write(task.getTitle() + "\n");
-            writer.write(task.isActive() + "\n");
-            writer.write(task.getRepeatInterval() + "\n");
-            if (task.isRepeated()) {
-                writer.write(ZonedDateTime.of(task.getStartTime(), ZoneId.systemDefault()).toEpochSecond() + "\n");
-                writer.write(ZonedDateTime.of(task.getEndTime(), ZoneId.systemDefault()).toEpochSecond() + "\n");
-            } else {
-                writer.write(ZonedDateTime.of(task.getTime(), ZoneId.systemDefault()).toEpochSecond() + "\n");
-            }
-        }
-        writer.flush();
+        GsonBuilder builder = new GsonBuilder();
+        builder.setPrettyPrinting();
+        Gson gson = builder.create();
+        gson.toJson(tasks, writer);
+
+        writer.close();
     }
 
 
-    private static void read(AbstractTaskList tasks, Reader in) throws IOException {
+    private static void read(AbstractTaskList tasks, Reader in){
         BufferedReader reader = new BufferedReader(in);
-        int size = Integer.parseInt(reader.readLine());
-        for (int i = 0; i < size; i++) {
-            String line = reader.readLine();
-            String title = reader.readLine();
-            boolean active = Boolean.parseBoolean(reader.readLine());
-            long interval = Long.parseLong(reader.readLine());
-            if (interval > 0) {
-                tasks.add(new Task(title, LocalDateTime.ofInstant(Instant.ofEpochSecond(Long.parseLong(reader.readLine())), ZoneId.systemDefault()), LocalDateTime.ofInstant(Instant.ofEpochSecond(Long.parseLong(reader.readLine())), ZoneId.systemDefault()), interval));
-            } else {
-                tasks.add(new Task(title, LocalDateTime.ofInstant(Instant.ofEpochSecond(Long.parseLong(reader.readLine())), ZoneId.systemDefault())));
-            }
+        GsonBuilder builder = new GsonBuilder();
+        builder.setPrettyPrinting();
+        Gson gson = builder.create();
+        AbstractTaskList abstractTaskList = gson.fromJson(reader,ArrayTaskList.class);
 
+
+        for(Task task : abstractTaskList){
+            tasks.add(task);
         }
     }
 
@@ -107,8 +97,8 @@ public class TaskIO {
     }
 
     public static void readText(AbstractTaskList tasks, File file) throws IOException {
-        try(FileReader fileReader = new FileReader(file)){
-            read(tasks,fileReader);
+        try (FileReader fileReader = new FileReader(file)) {
+            read(tasks, fileReader);
         }
     }
 }

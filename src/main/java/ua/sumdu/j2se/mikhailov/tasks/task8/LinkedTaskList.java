@@ -7,10 +7,8 @@ import java.util.stream.Stream;
 
 public class LinkedTaskList extends AbstractTaskList {
 
-    private Node<Task> head;
-    private Node<Task> tail;
-    private int size = 0;
-
+    transient Node<Task> head;
+    transient Node<Task> tail;
 
     private static class Node<Task> {
         Task item;
@@ -95,11 +93,6 @@ public class LinkedTaskList extends AbstractTaskList {
     private boolean rangeCheck(int index) {
         return index >= 0 && index < size;
     }
-
-    public int size() {
-        return size;
-    }
-
 
     public ListIterator<Task> listItr() {
         return new ListItr();
