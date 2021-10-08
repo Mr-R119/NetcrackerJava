@@ -1,13 +1,15 @@
 package ua.sumdu.j2se.mikhailov.tasks.task8;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 
 import java.io.*;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+
 public class TaskIO {
     private static void write(AbstractTaskList tasks, OutputStream out) throws IOException {
         DataOutputStream outputStream = new DataOutputStream(out);
@@ -67,27 +69,28 @@ public class TaskIO {
     }
 
     private static void write(AbstractTaskList tasks, Writer out) throws IOException {
-        BufferedWriter writer = new BufferedWriter(out);
-        GsonBuilder builder = new GsonBuilder();
-        builder.setPrettyPrinting();
-        Gson gson = builder.create();
-        gson.toJson(tasks, writer);
-
-        writer.close();
+        Gson gson = new Gson();
+        JsonWriter jsonWriter = new JsonWriter(out);
+        jsonWriter.setIndent(" ");
+        jsonWriter.beginArray();
+        for (Task task : tasks) {
+            gson.toJson(task, Task.class, jsonWriter);
+        }
+        jsonWriter.endArray();
+        jsonWriter.close();
     }
 
 
-    private static void read(AbstractTaskList tasks, Reader in){
-        BufferedReader reader = new BufferedReader(in);
-        GsonBuilder builder = new GsonBuilder();
-        builder.setPrettyPrinting();
-        Gson gson = builder.create();
-        AbstractTaskList abstractTaskList = gson.fromJson(reader,ArrayTaskList.class);
-
-
-        for(Task task : abstractTaskList){
+    private static void read(AbstractTaskList tasks, Reader in) throws IOException {
+        Gson gson = new Gson();
+        JsonReader jsonReader = new JsonReader(in);
+        jsonReader.beginArray();
+        while (jsonReader.hasNext()){
+            Task task = gson.fromJson(jsonReader,Task.class);
             tasks.add(task);
         }
+        jsonReader.endArray();
+        jsonReader.close();
     }
 
     public static void writerText(AbstractTaskList tasks, File file) throws IOException {
