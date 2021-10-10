@@ -1,0 +1,71 @@
+2021-10-10 14:38:44 INFO  Controller:25 - Logged in to the system
+2021-10-10 15:06:54 INFO  Controller:21 - Logged in to the system
+2021-10-10 15:07:28 INFO  Controller:246 - The data is saved. Log out of the system
+2021-10-10 15:15:53 INFO  Controller:20 - Logged in to the system
+2021-10-10 15:16:25 INFO  Controller:245 - The data is saved. Log out of the system
+2021-10-10 15:20:17 INFO  Controller:21 - Logged in to the system
+2021-10-10 15:22:43 INFO  Controller:82 - Task created
+2021-10-10 15:23:43 ERROR Controller:121 - java.time.DateTimeException: Invalid value for MonthOfYear (valid values 1 - 12): 19
+2021-10-10 15:57:17 INFO  Controller:23 - Logged in to the system
+2021-10-10 15:57:46 INFO  Controller:84 - Task created
+2021-10-10 16:00:14 INFO  Controller:23 - Logged in to the system
+2021-10-10 19:37:50 INFO  Controller:286 - The data is saved. Log out of the system
+2021-10-10 19:41:58 INFO  Controller:23 - Logged in to the system
+2021-10-10 19:42:31 ERROR Controller:167 - java.time.format.DateTimeParseException: Text '13/10/2021 sdasf' could not be parsed at index 11
+2021-10-10 19:42:52 ERROR Controller:167 - java.time.format.DateTimeParseException: Text 'qffsdf/fsdf/fsfsd sdfs:fsfs' could not be parsed at index 0
+2021-10-10 19:43:10 ERROR Controller:167 - java.time.format.DateTimeParseException: Text '32/10/2021 23:59' could not be parsed: Invalid value for DayOfMonth (valid values 1 - 28/31): 32
+2021-10-10 19:43:30 ERROR Controller:167 - java.time.format.DateTimeParseException: Text '31/9/2021 23:59' could not be parsed at index 3
+2021-10-10 19:43:45 ERROR Controller:167 - java.time.format.DateTimeParseException: Text '30/9/2021 23:59' could not be parsed at index 3
+2021-10-10 19:49:58 INFO  Controller:23 - Logged in to the system
+2021-10-10 19:50:14 ERROR Controller:180 - java.time.format.DateTimeParseException: Text 'fsdfsdfs' could not be parsed at index 0
+2021-10-10 19:50:16 ERROR Controller:180 - java.time.format.DateTimeParseException: Text 'fsdfsf' could not be parsed at index 0
+2021-10-10 19:53:59 ERROR Controller:115 - java.lang.NullPointerException
+2021-10-10 19:54:25 INFO  Controller:84 - Task created
+2021-10-10 19:54:28 INFO  Controller:306 - The data is saved. Log out of the system
+2021-10-10 19:57:55 INFO  Controller:23 - Logged in to the system
+2021-10-10 19:58:41 INFO  Controller:23 - Logged in to the system
+2021-10-10 19:58:53 INFO  Controller:306 - The data is saved. Log out of the system
+2021-10-10 20:12:18 INFO  Controller:23 - Logged in to the system
+2021-10-10 20:12:36 ERROR Controller:181 - java.time.format.DateTimeParseException: Text '1/1/2021' could not be parsed at index 0
+2021-10-10 20:12:46 ERROR Controller:181 - java.time.format.DateTimeParseException: Text '1/1/2021 10:00' could not be parsed at index 0
+2021-10-10 20:13:06 ERROR Controller:181 - java.time.format.DateTimeParseException: Text '02/02/2022 10:0' could not be parsed at index 14
+2021-10-10 20:13:19 ERROR Controller:116 - java.lang.NullPointerException
+2021-10-10 20:14:38 INFO  Controller:23 - Logged in to the system
+2021-10-10 20:14:59 ERROR Controller:174 - java.time.format.DateTimeParseException: Text '1/1/2021 10:00' could not be parsed at index 0
+2021-10-10 20:15:20 INFO  Controller:85 - Task created
+2021-10-10 20:15:25 INFO  Controller:300 - The data is saved. Log out of the system
+2021-10-10 20:15:29 INFO  Controller:300 - The data is saved. Log out of the system
+2021-10-10 22:04:54 INFO  Controller:23 - Logged in to the system
+2021-10-10 22:05:13 ERROR Controller:176 - Incorrect format date and time entered
+2021-10-10 22:06:47 INFO  Controller:23 - Logged in to the system
+2021-10-10 22:10:41 ERROR Controller:176 - Incorrect format date and time entered
+2021-10-10 22:15:20 INFO  Controller:23 - Logged in to the system
+2021-10-10 22:16:03 INFO  Controller:85 - Task created
+2021-10-10 22:16:46 INFO  Controller:183 - Task deleted
+2021-10-10 22:16:49 INFO  Controller:300 - The data is saved. Log out of the system
+2021-10-10 22:16:51 INFO  Controller:300 - The data is saved. Log out of the system
+2021-10-10 22:18:15 INFO  Controller:23 - Logged in to the system
+2021-10-10 22:18:23 INFO  Controller:183 - title deleted
+2021-10-10 22:20:21 INFO  Controller:23 - Logged in to the system
+2021-10-10 22:20:34 INFO  Controller:183 - title deleted
+2021-10-10 22:20:48 ERROR Controller:227 - Incorrect data entered Lunch with a beautiful girl
+2021-10-10 22:20:52 INFO  Controller:224 - The time has been changed in the task Lunch with a beautiful girl
+2021-10-10 22:20:58 INFO  Controller:299 - The data is saved. Log out of the system
+2021-10-10 22:21:00 INFO  Controller:299 - The data is saved. Log out of the system
+2021-10-10 22:21:56 INFO  Controller:23 - Logged in to the system
+2021-10-10 22:21:58 INFO  Controller:23 - Logged in to the system
+2021-10-10 22:22:28 ERROR Controller:174 - java.time.format.DateTimeParseException: Text '10/10/2021' could not be parsed at index 10
+2021-10-10 22:23:55 INFO  Controller:263 - The time has been changed in the task Lunch with a beautiful girl
+2021-10-10 22:29:31 INFO  Controller:21 - Logged in to the system
+2021-10-10 22:29:44 ERROR Controller:179 - java.time.format.DateTimeParseException: Text '10000' could not be parsed at index 2
+2021-10-10 22:29:52 INFO  Controller:83 - Task created
+2021-10-10 22:30:15 INFO  Controller:303 - The data is saved. Log out of the system
+2021-10-10 22:30:15 INFO  Controller:83 - Task created
+2021-10-10 22:30:17 INFO  Controller:303 - The data is saved. Log out of the system
+2021-10-10 22:30:19 INFO  Controller:303 - The data is saved. Log out of the system
+2021-10-10 22:31:18 INFO  Controller:21 - Logged in to the system
+2021-10-10 22:31:56 INFO  Controller:267 - The time has been changed in the task title
+2021-10-10 22:34:54 INFO  Controller:21 - Logged in to the system
+2021-10-10 22:36:01 INFO  Controller:272 - The time has been changed in the task title
+2021-10-10 22:36:17 INFO  Controller:308 - The data is saved. Log out of the system
+2021-10-10 22:36:18 INFO  Controller:308 - The data is saved. Log out of the system
